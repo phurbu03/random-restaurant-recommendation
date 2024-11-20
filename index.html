@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 음식점 추천</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>🍴 랜덤 음식점 추천</h1>
+        <p>음식 종류를 선택하고 주변 음식점을 추천받으세요.</p>
+        <div id="food-options" class="checkbox-group">
+            <label><input type="checkbox" value="korean"> 한식</label>
+            <label><input type="checkbox" value="chinese"> 중식</label>
+            <label><input type="checkbox" value="japanese"> 일식</label>
+            <label><input type="checkbox" value="pizza"> 피자</label>
+            <label><input type="checkbox" value="burger"> 버거</label>
+        </div>
+        <button id="fetch-button" class="btn">음식점 가져오기</button>
+        <div id="result" class="result-box">
+            여기에 추천 음식점이 표시됩니다.
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
