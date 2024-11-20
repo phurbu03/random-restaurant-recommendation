@@ -10,7 +10,7 @@ async function fetchRestaurants(position) {
     const apiKey = "e205630a63c8e3bb0e6bcafd4f479f3f10385951"; // Google Places API 키
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    const radius = 2000;
+    const radius = 100000;
 
     const checkboxes = document.querySelectorAll('#food-options input[type="checkbox"]:checked');
     const selectedTypes = Array.from(checkboxes).map(checkbox => checkbox.value);
