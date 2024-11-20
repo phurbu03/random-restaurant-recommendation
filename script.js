@@ -7,7 +7,7 @@ document.getElementById('fetch-button').addEventListener('click', () => {
 });
 
 async function fetchRestaurants(position) {
-    const apiKey = "YOUR_API_KEY"; // Google Places API 키
+    const apiKey = "AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs"; // Google Places API 키
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     const radius = 2000;
