@@ -11,21 +11,19 @@ async function fetchRestaurants(position) {
     const apiKey = "e205630a63c8e3bb0e6bcafd4f479f3f10385951"; // Google Places API 키
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-    const radius = 5000; // 반경 5km로 변경
+    const radius = 5000; // 반경 5km
 
+    // 음식 종류 가져오기
     const selectedFoodOption = document.querySelector('input[name="food"]:checked').value;
-    let keyword = "";
 
-    // 음식 종류에 따라 키워드 설정
+    let keyword = "";
     if (selectedFoodOption === "korean") {
         keyword = "한식";
     } else if (selectedFoodOption === "chinese") {
         keyword = "중식";
     } else if (selectedFoodOption === "japanese") {
         keyword = "일식";
-    } else {
-        keyword = ""; // 선택안함: 모든 종류 검색
-    }
+    } // "선택안함"일 경우 keyword는 빈 문자열("")로 유지
 
     const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&opennow=true&key=${apiKey}`;
 
