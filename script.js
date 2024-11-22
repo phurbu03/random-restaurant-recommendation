@@ -12,8 +12,6 @@ async function fetchRestaurants(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     const radius = 5000; // 반경 5km
-
-    // 음식 종류 가져오기
     const selectedFoodOption = document.querySelector('input[name="food"]:checked').value;
 
     let keyword = "";
@@ -23,9 +21,12 @@ async function fetchRestaurants(position) {
         keyword = "중식";
     } else if (selectedFoodOption === "japanese") {
         keyword = "일식";
-    } // "선택안함"일 경우 keyword는 빈 문자열("")로 유지
+    }
 
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&opennow=true&key=${apiKey}`;
+    // 프록시와 API URL 설정
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&opennow=true&key=${apiKey}`;
+    const url = proxyUrl + apiUrl;
 
     try {
         const response = await fetch(url);
