@@ -1,16 +1,22 @@
 document.getElementById('fetch-button').addEventListener('click', () => {
+    console.log("버튼 클릭됨");
     document.getElementById("result").innerText = "데이터를 불러오는 중입니다...";
     if (navigator.geolocation) {
+        console.log("위치 정보 요청 중...");
         navigator.geolocation.getCurrentPosition(fetchRestaurants, handleLocationError);
     } else {
+        console.log("위치 정보를 지원하지 않음");
         document.getElementById("result").innerText = "브라우저에서 위치 정보를 지원하지 않습니다.";
     }
 });
 
 async function fetchRestaurants(position) {
+    console.log("fetchRestaurants 함수 실행");
     const apiKey = "AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs"; // Google Places API 키
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
+    console.log(`현재 위치: 위도(${latitude}), 경도(${longitude})`);
+
     const radius = 5000; // 반경 5km
     const selectedFoodOption = document.querySelector('input[name="food"]:checked').value;
 
@@ -22,16 +28,19 @@ async function fetchRestaurants(position) {
     } else if (selectedFoodOption === "japanese") {
         keyword = "일식";
     }
+    console.log(`선택한 음식 종류: ${keyword || "전체"}`);
 
-    // 프록시와 API URL 설정
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&opennow=true&key=${apiKey}`;
     const url = proxyUrl + apiUrl;
 
+    console.log(`API 요청 URL: ${url}`);
+
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP 오류 상태: ${response.status}`);
+        console.log(`API 응답 상태: ${response.status}`);
         const data = await response.json();
+        console.log("API 응답 데이터:", data);
 
         const openRestaurants = data.results;
         if (openRestaurants.length > 0) {
