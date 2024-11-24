@@ -1,5 +1,3 @@
-const cors =require("cors");
-
 
 document.getElementById('fetch-button').addEventListener('click', () => {
     console.log("버튼 클릭됨");
@@ -62,4 +60,4 @@ function handleLocationError(error) {
     console.error("위치 정보 요청 오류:", error);
     document.getElementById("result").innerText = "위치 정보를 가져오는 중 오류가 발생했습니다.";
 }
-app.us(cors());
+
