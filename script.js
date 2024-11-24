@@ -26,8 +26,11 @@ async function fetchRestaurants(position) {
     }
     console.log(`선택한 음식 종류: ${selectedFoodOption}`);
 
-    // 로컬 프록시 서버를 사용하여 요청
-    const apiUrl = `http://localhost:3000/api/places?location=${latitude},${longitude}&radius=${radius}&type=restaurant&opennow=true&keyword=${keyword}`;
+   const proxyUrl = "https://cors-anywhere.herokuapp.com/"; // CORS 우회 프록시
+   const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&key=${apiKey}`;
+   const url = proxyUrl + apiUrl; // 프록시를 추가한 요청 URL
+
+console.log(`API 요청 URL: ${url}`);
 
     try {
         const response = await fetch(apiUrl);
