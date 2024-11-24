@@ -24,7 +24,8 @@ async function fetchRestaurants(position) {
     console.log(`선택한 음식 종류: ${keyword || '전체'}`);
 
     // 프록시 서버를 통해 Google Places API 요청
-    const apiUrl = `http://localhost:3000/api/places?location=${latitude},${longitude}&radius=5000&type=restaurant&opennow=true&keyword=${keyword}&key=AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs`;
+    const apiUrl = `http://172.30.1.26:3000/api/places?location=${latitude},${longitude}&radius=5000&type=restaurant&opennow=true&keyword=${keyword}&key=AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs`;
+
 
     console.log(`API 요청 URL: ${apiUrl}`);
 
