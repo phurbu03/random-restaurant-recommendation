@@ -1,3 +1,4 @@
+
 document.getElementById('fetch-button').addEventListener('click', () => {
     console.log('버튼 클릭됨');
     document.getElementById('result').innerText = "데이터를 불러오는 중입니다...";
