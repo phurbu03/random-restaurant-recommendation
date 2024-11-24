@@ -18,7 +18,7 @@ app.use('/api/places',
                 type: req.query.type,
                 opennow: req.query.opennow,
                 keyword: req.query.keyword,
-                key: '5435ac4831aca5ab803639eb96f75b41f560f9f7' // Google places API 키
+                key: 'AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs' // Google places API 키
             });
             proxyReq.path += `?${params.toString()}`;
         },
