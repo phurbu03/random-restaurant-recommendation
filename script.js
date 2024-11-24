@@ -18,7 +18,7 @@ async function fetchRestaurants(position) {
     console.log(`현재 위치: 위도(${latitude}), 경도(${longitude})`);
 
     const radius = 5000; // 반경 5km
-    const selectedFoodOption = document.querySelector('input[name="food"]:checked').value;
+    const selectedFoodOption = document.querySelector('input[name="food"]:checked')?.value;
 
     let keyword = "";
     if (selectedFoodOption === "korean") {
@@ -30,25 +30,29 @@ async function fetchRestaurants(position) {
     }
     console.log(`선택한 음식 종류: ${keyword || "전체"}`);
 
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&opennow=true&key=${apiKey}`;
-    const url = proxyUrl + apiUrl;
+    const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=${keyword}&type=restaurant&key=${apiKey}`;
+    const url = apiUrl; // 프록시 제거. 테스트 시 필요하면 proxyUrl 추가
 
     console.log(`API 요청 URL: ${url}`);
 
     try {
         const response = await fetch(url);
         console.log(`API 응답 상태: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`HTTP 오류: ${response.status}`);
+        }
         const data = await response.json();
         console.log("API 응답 데이터:", data);
 
-        const openRestaurants = data.results;
+        const openRestaurants = data.results || [];
+        console.log(`검색된 음식점 수: ${openRestaurants.length}`);
+
         if (openRestaurants.length > 0) {
             const randomIndex = Math.floor(Math.random() * openRestaurants.length);
             const selectedRestaurant = openRestaurants[randomIndex];
             document.getElementById("result").innerText = `추천 음식점: ${selectedRestaurant.name} (${selectedRestaurant.vicinity})`;
         } else {
-            document.getElementById("result").innerText = "현재 영업 중인 음식점이 없습니다.";
+            document.getElementById("result").innerText = "현재 조건에 맞는 음식점이 없습니다.";
         }
     } catch (error) {
         console.error("API 호출 중 오류 발생:", error);
