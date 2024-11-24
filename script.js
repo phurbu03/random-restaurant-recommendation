@@ -20,11 +20,11 @@ async function fetchRestaurants(position) {
 
     const selectedFoodOption = document.querySelector('input[name="food"]:checked');
     let keyword = selectedFoodOption ? selectedFoodOption.value : '';
-    if (keyword === 'none') keyword = ''; // 선택안함 처리
+    if (keyword === 'none') keyword = ''; // 선택안함 
 
     console.log(`선택한 음식 종류: ${keyword || '전체'}`);
 
-    // 프록시 서버를 통해 Google Places API 요청
+
     const apiUrl = `https://172.30.1.26:3000/api/places?location=${latitude},${longitude}&radius=5000&type=restaurant&opennow=true&keyword=${keyword}&key=AIzaSyAgM5OqN72VeDmuTb9hMGGf2HxdZDGkREs`;
 
 
